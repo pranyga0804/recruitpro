@@ -1,25 +1,22 @@
-"use client";
-import { useSession, signOut } from "next-auth/react";
+import Link from 'next/link';
 
 export default function Navbar() {
-  const { data: session } = useSession();
-
   return (
-    <div className="w-full flex justify-between items-center mb-10 flex-wrap gap-4">
-      <h1 className="text-3xl font-bold text-[#00ccff]">RecruitPro Dashboard</h1>
-
-      {session?.user && (
-        <div className="text-right text-white">
-          <p className="text-sm font-medium">{session.user.name}</p>
-          <p className="text-xs text-gray-400">{session.user.email}</p>
-          <button
-            onClick={() => signOut()}
-            className="mt-2 bg-red-500 text-white px-4 py-1 rounded-md text-sm hover:bg-red-600 transition-colors"
-          >
-            Logout
-          </button>
-        </div>
-      )}
-    </div>
+    <nav className="bg-black p-4 flex justify-between items-center border-b border-blue-500">
+      <Link href="/dashboard">
+        <span className="text-neon-blue text-2xl font-bold cursor-pointer">RecruitPro</span>
+      </Link>
+      <div className="space-x-4">
+        <Link href="/dashboard">
+          <span className="text-neon-blue hover:underline cursor-pointer">Dashboard</span>
+        </Link>
+        <Link href="/dashboard/applications">
+          <span className="text-neon-blue hover:underline cursor-pointer">Applications</span>
+        </Link>
+        <Link href="/dashboard/jobs">
+          <span className="text-neon-blue hover:underline cursor-pointer">Jobs</span>
+        </Link>
+      </div>
+    </nav>
   );
 }
